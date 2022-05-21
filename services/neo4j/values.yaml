@@ -1,0 +1,19 @@
+# https://github.com/neo4j/helm-charts/tree/4.4.6/neo4j-standalone
+
+neo4j:
+  name: test
+  password: test
+  edition: "community"
+  acceptLicenseAgreement: "no"
+volumes:
+  data:
+    mode: defaultStorageClass
+    defaultStorageClass:
+      accessModes:
+        - ReadWriteOnce
+      requests:
+        storage: 5Gi
+services:
+  neo4j:
+    spec:
+      type: ClusterIP

@@ -1,0 +1,25 @@
+# https://github.com/joeferner/redis-commander
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-commander
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-commander
+  template:
+    metadata:
+      labels:
+        app: redis-commander
+    spec:
+      containers:
+      - name: redis-commander
+        image: ghcr.io/joeferner/redis-commander
+        resources: {}
+        env:
+        - name: REDIS_HOSTS
+          value: test:redis-master:6379:0:test
+        ports:
+        - name: redis-commander
+          containerPort: 8081

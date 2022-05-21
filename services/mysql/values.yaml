@@ -1,0 +1,11 @@
+# https://github.com/bitnami/charts/tree/master/bitnami/mysql
+
+fullnameOverride: mysql
+auth:
+  rootPassword: test
+  database: test
+  username: test
+  password: test
+primary:
+  persistence:
+    enabled: false

@@ -1,0 +1,12 @@
+# https://github.com/bitnami/charts/tree/master/bitnami/mongodb
+
+fullnameOverride: mongodb
+
+persistence:
+  enabled: false
+
+auth:
+  rootPassword: test
+  usernames: [test]
+  passwords: [test]
+  databases: [test]

@@ -1,0 +1,32 @@
+load('ext://helm_remote', 'helm_remote')
+load('../../Tiltfile_common', 'port_forward_host')
+
+helm_remote(
+  'mongodb',
+  repo_name='bitnami',
+  repo_url='https://charts.bitnami.com/bitnami',
+  values='./values.yaml'
+)
+
+k8s_yaml('./mongo-express.yaml')
+
+k8s_resource(
+  "mongodb",
+  port_forwards=port_forward(
+    27017,
+    container_port=27017,
+    name='mongodb',
+    host=port_forward_host
+  )
+)
+
+k8s_resource(
+  "mongo-express",
+  port_forwards=port_forward(
+    30000,
+    container_port=8081,
+    name='mongo-express',
+    host=port_forward_host
+  ),
+  resource_deps=['mongodb']
+)
