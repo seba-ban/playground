@@ -1,0 +1,7 @@
+# https://github.com/bitnami/charts/tree/master/bitnami/cassandra
+
+fullnameOverride: cassandra
+dbUser:
+  password: test
+persistence:
+  enabled: false

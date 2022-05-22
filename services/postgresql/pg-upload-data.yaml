@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name:  pg-upload-data
+spec:
+  template:
+    metadata:
+      name:  pg-upload-data
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: upload
+          image: postgres
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              apt update
+              apt install -y wget
+              wget https://pgexercises.com/dbfiles/clubdata.sql
+              PGPASSWORD=test psql -U postgres -h postgresql -f clubdata.sql -d postgres -x -q
+              echo "finished uploading data"

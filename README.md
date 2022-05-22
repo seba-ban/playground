@@ -20,10 +20,6 @@ Needed binaries: `minikube`, `tilt` and `helm`.
 
 ## TO ADD
 
-* https://github.com/bitnami/charts/tree/master/bitnami/postgresql
-* https://hub.docker.com/r/dpage/pgadmin4/
-* https://github.com/bitnami/charts/tree/master/bitnami/cassandra
-* https://github.com/bitnami/charts/tree/master/bitnami/etcd
 * https://github.com/bitnami/charts/tree/master/bitnami/memcached
 * https://github.com/bitnami/charts/tree/master/bitnami/rabbitmq
 * https://github.com/bitnami/charts/tree/master/bitnami/kafka

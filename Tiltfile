@@ -5,7 +5,8 @@ cfg = config.parse()
 groups = {
   'mysql': ['mysql', 'phpmyadmin'],
   'redis': ['redis-master', 'redis-commander'],
-  'mongodb': ['mongodb', 'mongo-express']
+  'mongodb': ['mongodb', 'mongo-express'],
+  'postgresql': ['postgresql', 'pgadmin', 'pg-upload-data'],
 }
 resources = []
 for arg in cfg.get('to-run', []):

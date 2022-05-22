@@ -1,0 +1,19 @@
+load('ext://helm_remote', 'helm_remote')
+load('../../Tiltfile_common', 'port_forward_host')
+
+helm_remote(
+  'cassandra',
+  repo_name='bitnami',
+  repo_url='https://charts.bitnami.com/bitnami',
+  values='./values.yaml'
+)
+
+k8s_resource(
+  "cassandra",
+  port_forwards=port_forward(
+    29042,
+    container_port=9042,
+    name='cassandra',
+    host=port_forward_host
+  )
+)

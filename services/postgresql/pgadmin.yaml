@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin-servers
+data:
+  servers.json: |
+    {
+        "Servers": {
+            "1": {
+                "Name": "Test server",
+                "Group": "Server Group 1",
+                "Port": 5432,
+                "Username": "postgres",
+                "Host": "postgresql",
+                "SSLMode": "prefer",
+                "MaintenanceDB": "postgres"
+            }
+        }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+spec:
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      volumes:
+        - name: servers
+          configMap:
+            name: pgadmin-servers
+      containers:
+        - name: pgadmin
+          image: dpage/pgadmin4
+          volumeMounts:
+            - name: servers
+              mountPath: /pgadmin4/servers.json
+              subPath: "servers.json"
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: test@test.com
+            # TODO: use sealed secret
+            - name: PGADMIN_DEFAULT_PASSWORD
+              value: test
+          resources: {}
+          ports:
+            - containerPort: 80

@@ -1,0 +1,15 @@
+# https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+
+fullnameOverride: postgresql
+global:
+  postgresql:
+    auth:
+      postgresPassword: test
+      username: test
+      password: test
+      database: test
+
+architecture: standalone
+primary:
+  persistence:
+    enabled: false
