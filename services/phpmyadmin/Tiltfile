@@ -1,5 +1,4 @@
 load('ext://helm_remote', 'helm_remote')
-load('../../Tiltfile_common', 'port_forward_host')
 
 helm_remote(
   'phpmyadmin',
@@ -14,7 +13,6 @@ k8s_resource(
     30001,
     container_port=8080,
     name='phpmyadmin',
-    host=port_forward_host,
   ),
-  resource_deps=['mysql']
+  resource_deps=['mysql:statefulset']
 )

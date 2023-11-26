@@ -1,0 +1,37 @@
+load('ext://helm_remote', 'helm_remote')
+
+helm_remote(
+  'airflow',
+  repo_name='airflow',
+  repo_url='https://airflow.apache.org',
+  values='./values.yaml'
+)
+
+labels = ["airflow"]
+
+for resource in [
+    "airflow-scheduler",
+    "airflow-statsd",
+    "airflow-postgresql",
+    "airflow-redis",
+    "airflow-triggerer",
+    "airflow-worker",
+    "airflow-create-user",
+    "airflow-run-airflow-migrations",
+]:
+    k8s_resource(
+        resource,
+        labels=labels,
+    )
+
+k8s_resource(
+    "airflow-webserver",
+    labels=labels,
+    port_forwards=[
+        port_forward(
+        28081,
+        container_port=8080,
+        ),
+    ]
+)
+

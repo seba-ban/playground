@@ -1,0 +1,40 @@
+k8s_yaml('./manifests.yaml')
+
+labels = ['kfp']
+
+for resource in [
+    'metadata-grpc-deployment',
+    'metadata-writer',
+    'ml-pipeline-persistenceagent',
+    'ml-pipeline-visualizationserver',
+    'mysql:deployment',
+    'minio:deployment:kubeflow',
+    'ml-pipeline-viewer-crd',
+    'cache-server',
+    'cache-deployer-deployment',
+    'ml-pipeline-scheduledworkflow',
+    'metadata-envoy-deployment',
+    'workflow-controller',
+]:
+    k8s_resource(
+        resource,
+        labels=labels,
+    )
+
+k8s_resource(
+    "ml-pipeline",
+    labels=labels,
+    port_forwards=port_forward(
+        28888,
+        container_port=8888,
+    )
+)
+
+k8s_resource(
+    "ml-pipeline-ui",
+    labels=labels,
+    port_forwards=port_forward(
+        23000,
+        container_port=3000,
+    )
+)

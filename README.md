@@ -26,3 +26,7 @@ Needed binaries: `minikube`, `tilt` and `helm`.
 * https://github.com/bitnami/charts/tree/master/bitnami/influxdb
 * https://github.com/bitnami/charts/tree/master/bitnami/pytorch
 * https://github.com/bitnami/charts/tree/master/bitnami/spark
+
+## TODO
+
+* refactor so it doesn't always need to load all the file

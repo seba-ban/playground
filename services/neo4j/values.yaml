@@ -1,8 +1,7 @@
-# https://github.com/neo4j/helm-charts/tree/4.4.6/neo4j-standalone
-
+# https://github.com/neo4j/helm-charts/blob/5.13.0/neo4j/values.yaml
 neo4j:
-  name: test
-  password: test
+  name: neo4j
+  password: secretpassword
   edition: "community"
   acceptLicenseAgreement: "no"
 volumes:

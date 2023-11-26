@@ -1,5 +1,4 @@
 load('ext://helm_remote', 'helm_remote')
-load('../../Tiltfile_common', 'port_forward_host')
 
 helm_remote(
   'mysql',
@@ -9,11 +8,10 @@ helm_remote(
 )
 
 k8s_resource(
-  "mysql",
+  "mysql:statefulset",
   port_forwards=port_forward(
     23306,
     container_port=3306,
     name='mysql',
-    host=port_forward_host
   )
 )

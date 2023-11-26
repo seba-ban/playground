@@ -1,5 +1,4 @@
 load('ext://helm_remote', 'helm_remote')
-load('../../Tiltfile_common', 'port_forward_host')
 
 helm_remote(
   'etcd',
@@ -14,6 +13,5 @@ k8s_resource(
     22379,
     container_port=2379,
     name='etcd',
-    host=port_forward_host
   )
 )

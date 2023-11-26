@@ -1,26 +1,25 @@
-load('../../Tiltfile_common', 'port_forward_host')
+load('ext://helm_remote', 'helm_remote')
 
-yaml = helm(
-  'neo4j-standalone',
-  name='neo4j',
+helm_remote(
+  'neo4j',
+  repo_name='neo4j',
+  repo_url='https://helm.neo4j.com/neo4j',
   values='./values.yaml'
 )
-k8s_yaml(yaml)
 
 k8s_resource(
   "neo4j",
+  labels=["neo4j"],
   port_forwards=[
     port_forward(
       27687,
       container_port=7687,
       name='neo4j',
-      host=port_forward_host
     ),
     port_forward(
       27474,
       container_port=7474,
       name='neo4j-browser',
-      host=port_forward_host
     ),
   ]
 )

@@ -1,37 +1,24 @@
 load('ext://helm_remote', 'helm_remote')
-load('../../Tiltfile_common', 'port_forward_host')
 
-# I had issues with minio repo taking
-# very long to update, so just pulled
-# the chart locally and deleted the
-# repo from helm...
-# helm_remote(
-#   'minio',
-#   repo_name='minio',
-#   repo_url='https://charts.min.io/',
-#   values='./values.yaml'
-# )
-yaml = helm(
-  './minio',
-  name='minio',
+helm_remote(
+  'minio',
+  repo_name='minio',
+  repo_url='https://charts.min.io/',
   values='./values.yaml'
 )
-k8s_yaml(yaml)
 
 k8s_resource(
-  "minio",
+  "minio:deployment:default",
   port_forwards=[
     port_forward(
       29000,
       container_port=9000,
       name='minio',
-      host=port_forward_host
     ),
     port_forward(
       29001,
       container_port=9001,
       name='minio-console',
-      host=port_forward_host
     ),
   ]
 )
