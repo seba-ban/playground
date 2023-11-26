@@ -12,7 +12,6 @@ labels = ["airflow"]
 for resource in [
     "airflow-scheduler",
     "airflow-statsd",
-    "airflow-postgresql",
     "airflow-redis",
     "airflow-triggerer",
     "airflow-worker",
@@ -31,6 +30,17 @@ k8s_resource(
         port_forward(
         28081,
         container_port=8080,
+        ),
+    ]
+)
+
+k8s_resource(
+    "airflow-postgresql",
+    labels=labels,
+    port_forwards=[
+        port_forward(
+        22333,
+        container_port=5432,
         ),
     ]
 )
